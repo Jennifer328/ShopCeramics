@@ -6,6 +6,7 @@ const orderRoutes = require('./routes/orderRoute');
 const productRoutes = require('./routes/productRoute');
 const shoppingCartRoutes = require('./routes/shoppingCartRoute');
 const cors = require('cors');
+const Review = require('./models/ReviewModel');
 
 
 const app = express();
@@ -17,7 +18,7 @@ app.use(express.json()); //check req body, if there is body then attach to req o
 app.use((req,res,next) =>{
     console.log(req.path, req.method);
     next();
-})
+});
 
 
 //routes
@@ -30,6 +31,15 @@ app.get('/', (req,res)=>{
    res.json({message: 'welcome to my shop'});
 })
 
+// get reviews data from db
+app.get('/reviews', (req,res)=>{
+    Review
+    .find()
+    .then((reviews)=>{
+        res.json(reviews);
+    })
+    .catch((err)=> res.json(err))
+ })
 
 
 //connect to db

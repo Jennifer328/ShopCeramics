@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useLogin } from '../hooks/useLogin';
 
-import google from '../assets/google.png';
+// import google from '../assets/google.png';
 import GoogleLogin from '../components/GoogleLogin';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
@@ -22,7 +22,7 @@ const Login = () => {
     console.log(user);
     await login(user.email, user.id, user.name, 'googleuser');
   }
-
+  
   return (
     <div className="login-page">
       <div className="form-background">
@@ -66,6 +66,7 @@ const Login = () => {
 
           </div>
           {/* <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}><img style={{ width:'20px', marginRight:'5px'}} src={google} alt="google" /><Link>Sign in with Google</Link></div> */}
+
           <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
             <GoogleLogin googleUserData={googleUserData}/>
           </GoogleOAuthProvider>

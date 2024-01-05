@@ -15,11 +15,15 @@ import Faq from './pages/Faq';
 import ContactUs from './pages/ContactUs';
 import OrderConfirmation from './pages/OrderConfirmation'; 
 import DrinkSetDetails from './pages/DrinkSetDetails';
-
+import { ShopContextProvider } from "./context/shop-context";
+import ReviewDashboard from './CRUD/Reviews/ReviewDashboard';
+import Admin from './pages/Admin';
 function App() {
   return (
     <>
+   
      <BrowserRouter>
+     <ShopContextProvider>
       <Routes>
         <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={<Login/>} />
@@ -40,9 +44,14 @@ function App() {
         <Route path="/faq" element={<Faq/>} />
         <Route path="/contact" element={<ContactUs/>} />
         <Route path="/orderconfirmation" element={<OrderConfirmation/>} />
+
+        <Route path="/CURD/reviews" element={<ReviewDashboard  />} />
         
+        <Route path="/adminportal" element={<Admin />} />
       </Routes>
+      </ShopContextProvider>
      </BrowserRouter>
+    
     </>
   );
 }

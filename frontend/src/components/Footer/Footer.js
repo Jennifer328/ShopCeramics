@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './Footer.css';
 
@@ -42,6 +43,10 @@ const Footer = () => {
                             </li>
                             <li>Privacy Policy</li>
                             <li>Accessibility Statement</li>
+                            <li>
+                              <Link to="/adminportal">Admin Portal</Link>
+                            </li>
+                            
                         </ul>
                     </div>
                 </div>

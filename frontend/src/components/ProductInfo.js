@@ -1,11 +1,11 @@
-import React from "react";
-import Stars from "./Stars"
+import React, { useContext } from "react";
+import Stars from "./Stars";
+import { ShopContext } from "../context/shop-context";
 
 const ProductInfo = (props) => {
   const included = props.included.map((item) => item);
-  const handleAdd=()=>{
-    
-  }
+  const { addToCart, cartItems } = useContext(ShopContext);
+  const cartItemCount = cartItems[props.id];
   
   return (
     <div className="products-container">
@@ -33,16 +33,11 @@ const ProductInfo = (props) => {
       <input
         className="quantity"
         type="number"
-        value="1"
+        placeholder="1"
         id="quantity"
       ></input>
       <br />
-      <input
-        className="button btn-add-to-cart btn-blue"
-        type="button"
-        onClick={handleAdd}
-        value="Add to Cart"
-      ></input>
+      <input type="button" className="button btn-add-to-cart btn-blue" value={`Add To Cart ${cartItemCount > 0 ? `(${cartItemCount})` : ''}`}  onClick={() => addToCart(props.id)} />
     </div>
   );
 };

@@ -4,8 +4,6 @@ import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-// let clientId = "841711234121-sr06beia14k10em53hvqlpmacd2l6lvn.apps.googleusercontent.com";
-
 
 function GoogleLogin({googleUserData}) {
     const [user, setUser] = React.useState([]);

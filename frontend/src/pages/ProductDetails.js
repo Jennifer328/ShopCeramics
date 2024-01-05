@@ -49,6 +49,7 @@ const ProductDetail = () => {
   const product = (
     <ProductInfo
       key={pdt.id}
+      id={pdt.id}
       name={pdt.name}
       price={pdt.price}
       rate={pdt.rate}

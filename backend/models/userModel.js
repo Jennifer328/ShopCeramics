@@ -4,11 +4,6 @@ const validator = require('validator');
 
 const Schema = mongoose.Schema;
 
-// const shoppingCartSchema = new Schema({
-//     productId: {type:Schema.Types.ObjectId, ref: 'Product', required:true},
-//     productQuantity: {type:Number,required:true},
-// });
-
 
 const userSchema = new Schema({
 
@@ -30,15 +25,14 @@ const userSchema = new Schema({
         }
     ],
 
-    
-},{timestamps:true});
+}, { timestamps: true });
 
 
 //static signup method
-userSchema.statics.signup = async function (username, email, password){
+userSchema.statics.signup = async function (username, email, password) {
 
-    if(! username || !email || !password){
-       throw Error('All fields must be filled');
+    if (!username || !email || !password) {
+        throw Error('All fields must be filled');
     }
    const exists = await this.findOne({email});
    if(exists){
@@ -50,12 +44,12 @@ userSchema.statics.signup = async function (username, email, password){
 //    if(!validator.isStrongPassword(password)){
 //      throw Error('Password not strong enough')
 //    }
-   
-   const salt = await bcrypt.genSalt(10);
-   const hash = await bcrypt.hash(password, salt);
 
-   const user = await this.create({username, email, password:hash})
-   return user;
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
+    const user = await this.create({ username, email, password: hash })
+    return user;
 }
 
 

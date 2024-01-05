@@ -1,12 +1,12 @@
 import {Link} from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useState,  useContext }  from 'react';
-import SideBar from './SideBar';
+import SiderBarCRUD from './SiderBarCRUD'
 import {FaBars} from 'react-icons/fa';
 import { IoIosClose } from "react-icons/io";
 import { ShopContext } from "../context/shop-context";
 
-const Navbar =() =>{ 
+const NavbarCRUD =() =>{ 
 
     const [isMenuExtend, setIsMenuExtend] = useState(false)
 
@@ -34,32 +34,36 @@ const Navbar =() =>{
                         <IoIosClose />
                     </div>
                     {isMenuExtend && 
-                      <SideBar onClose={handleSideBar}/>
+                      <SiderBarCRUD onClose={handleSideBar}/>
                     }
                     {!isMenuExtend && 
                       <>
-                        <div><Link to="/about">ABOUT US</Link></div>
-                        <div><Link to="/contact">CONTACT US</Link></div>
+                        <div><Link to="/CURD">HOME</Link></div>
+                        <div><Link to="/CURD/users">USERS</Link></div>
+                      </>
+                    }
+                    {!isMenuExtend && 
+                      <>
+                        <div><Link to="/CURD/products">PROUDCTS</Link></div>
+                        <div><Link to="/CURD/reviews">REVIEWS</Link></div>
                       </>
                     }
                    
                   
                 </nav>
                 <Link to="/"><h2 className="logo">CERAMIX</h2></Link>
+         
                 <nav className='navUser'>
                    {user && (
                     <>
-
-                    <div><Link to="/myaccount" className='btn'>{(user.username || user.email.substring(0, user.email.indexOf('@'))).toUpperCase()}</Link></div>
-                    <div><Link to="/mycart">YOUR CART {totalitems !== 0 &&<span className="cartCount ">{totalitems}</span>} </Link></div>
-
+                    <div><Link to="/myaccount" className='btn search-btn'>{(user.username || user.email.substring(0, user.email.indexOf('@'))).toUpperCase()}</Link></div>
+                    
                     </>
                    )}
 
                    {!user && (
                     <>
-                    <div><Link to="/myaccount">MY ACCOUNT</Link></div>
-                    <div><Link to="/mycart">MY CART {totalitems !== 0 &&<span className="cartCount ">{totalitems}</span>}</Link></div>
+                    <div><Link to="/myaccount"></Link></div>
                     </>
                    )}
                    
@@ -69,4 +73,4 @@ const Navbar =() =>{
     )
 }
 
-export default Navbar;
+export default NavbarCRUD;

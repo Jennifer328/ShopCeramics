@@ -1,9 +1,12 @@
-import React from 'react'
+import React,{ useContext }  from 'react'
 import {Link} from 'react-router-dom'
 import Stars from "./Stars"
+import { ShopContext } from "../context/shop-context";
 
 const DrinkSetCard = (props) => {
-
+  const { addToCart, cartItems } = useContext(ShopContext);
+  const cartItemCount = cartItems[props.id];
+  
   return (
     
     <div className="card">
@@ -24,7 +27,7 @@ const DrinkSetCard = (props) => {
                 <span className='rate'>{props.rate}</span>
                 <span className='review-number'>({props.numberOfViews})reviews</span>
             </div>
-            <input type="button" className="button btn-add-to-cart btn-blue" value="Add to Cart"/>
+            <input type="button" className="button btn-add-to-cart btn-blue" value={`Add To Cart ${cartItemCount > 0 ? `(${cartItemCount})` : ''}`}  onClick={() => addToCart(props.id)} />
             
             
         </div>

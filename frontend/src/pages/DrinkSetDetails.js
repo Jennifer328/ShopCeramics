@@ -50,6 +50,7 @@ const DrinkSetDetails = () => {
   const product = (
     <ProductInfo
       key={pdt.id}
+      id={pdt.id}
       name={pdt.name}
       price={pdt.price}
       rate={pdt.rate}
@@ -111,7 +112,7 @@ const DrinkSetDetails = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
