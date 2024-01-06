@@ -13,7 +13,7 @@ const getProduct = async (req, res) => {
     const product = await Product.findOne({id: productId});
 
     if(!product){
-      res.status(404).json({message: 'Product not found'});
+      return res.status(404).json({message: 'Product not found'});
     }
     res.status(200).json(product);
 

@@ -70,7 +70,7 @@ const Login = () => {
           <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
             <GoogleLogin googleUserData={googleUserData}/>
           </GoogleOAuthProvider>
-          <div>Don't have an account? <Link to="/signup"> <span style={{ marginLeft: '10px', color: 'var(--light-blue)' }}>Create Account</span></Link></div>
+          <div>Don't have an account? <Link to="/signup"> <span style={{ marginLeft: '10px', fontSize:'0.75rem', color: 'var(--light-blue)' }}>Create Account</span></Link></div>
         </div>
 
       </div>

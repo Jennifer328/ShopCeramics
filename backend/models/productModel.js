@@ -6,6 +6,7 @@ const productSchema = new Schema({
     name: {type:String, unique:true, required:true},
     category:{
         type: String, 
+        required: true,
         default: 'Tableware', 
         enum: [ 'Decor', 'Drink', 'Tableware']},
     description: {type:String, required:true},
