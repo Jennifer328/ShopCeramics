@@ -12,7 +12,7 @@ export const useLogin =() =>{
        setIsLoading(true);
        setError(null);
 
-       const response = await fetch('/account/login', {
+       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/account/login`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({identifier,password,name,type})
@@ -27,6 +27,7 @@ export const useLogin =() =>{
        }
        if(response.ok){
         //save the user to local storage
+        // console.log("====> useLogin, json:",json);
         localStorage.setItem('user', JSON.stringify(json));
         dispatch({type: 'LOGIN', payload: json})
         

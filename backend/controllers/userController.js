@@ -14,7 +14,8 @@ const loginUser = async (req, res) =>{
     try{
         const user = await User.login( identifier, password, type);
         const token = createToken(user._id);
-        res.status(200).json({username: user.username, email:user.email, token});
+        // console.log("====> userController.js: loginUser, user:",user.id);
+        res.status(200).json({userid: user.id, username: user.username, email:user.email, token});
        
        }catch(error){
           res.status(400).json({error: error.message});

@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import Stars from "./Stars";
 import { ShopContext } from "../context/shop-context";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProductInfo = (props) => {
   const included = props.included.map((item) => item);
   const { addToCart, cartItems } = useContext(ShopContext);
   const cartItemCount = cartItems[props.id];
+  const { user } = useAuthContext();
   
   return (
     <div className="products-container">
@@ -37,7 +39,7 @@ const ProductInfo = (props) => {
         id="quantity"
       ></input>
       <br />
-      <input type="button" className="button btn-add-to-cart btn-blue" value={`Add To Cart ${cartItemCount > 0 ? `(${cartItemCount})` : ''}`}  onClick={() => addToCart(props.id)} />
+      <input type="button" className="button btn-add-to-cart btn-blue" value={`Add To Cart ${cartItemCount > 0 ? `(${cartItemCount})` : ''}`}  onClick={() => addToCart(props.data._id,user)} />
     </div>
   );
 };

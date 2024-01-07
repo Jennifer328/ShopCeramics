@@ -1,11 +1,7 @@
 import React, {useState, useMemo} from 'react'
 import { useAuthContext } from '../../../hooks/useAuthContext';
-
-
 import './Productboard.css';
 import { IoMdArrowDropdown } from "react-icons/io";
-
-
 
 const Productboard = ({data}) => {
 
@@ -85,7 +81,7 @@ const Productboard = ({data}) => {
         };
 
         try {
-            const response = await fetch('/products', {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -118,13 +114,16 @@ const Productboard = ({data}) => {
         e.preventDefault();
         setFindError('');
         try {
-            const response = await fetch(`/products/${productId}`, {
+            // const response = await fetch(`/products?id=${productId}&t=${new Date().getTime()}`
+            const response = await fetch(`/products/byId?id=${productId}&t=${new Date().getTime()}`, {
+              
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${user.token}`,
               },
             });
+          
             if(!response.ok){
                 if(response.status === 404){
                     setFindError('Product not found');
@@ -135,12 +134,17 @@ const Productboard = ({data}) => {
                return;
             }
             const foundProduct = await response.json();
-            setCategory(foundProduct.category);
-            setProductName(foundProduct.name);
-            setProductPrice(foundProduct.price);
-            setDescription(foundProduct.description);
-            setImageURL(foundProduct.imageURL);
-            setQuantity(foundProduct.quantity);
+            console.log(foundProduct);
+            if(foundProduct){
+                setCategory(foundProduct.category);
+                setProductName(foundProduct.name);
+                setProductPrice(foundProduct.price);
+                setDescription(foundProduct.description);
+                setImageURL(foundProduct.imageURL);
+                setQuantity(foundProduct.quantity);
+            }
+      
+           
  
         }  catch (error) {
             console.error('Error finding product:', error);
@@ -162,7 +166,7 @@ const Productboard = ({data}) => {
         };
 
         try {
-            const response = await fetch(`/products/${productId}`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${productId}`, {
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json',
@@ -193,7 +197,7 @@ const Productboard = ({data}) => {
     const handleDeleteSubmit = async(e) => {
         e.preventDefault();
         try{
-            const response = await fetch(`/products/${productId}`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${productId}`, {
                 method: 'DELETE',
                 headers:{
                     'Content-Type': "application/json",
@@ -489,7 +493,7 @@ const Productboard = ({data}) => {
                 </tr>
             </thead>
             <tbody>
-                {sortedData.map((product) => (
+                {allProducts.map((product) => (
                     <tr key={product._id}>
                         <td>{product.category}</td>
                         <td>{product.id}</td>

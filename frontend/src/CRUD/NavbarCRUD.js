@@ -14,7 +14,7 @@ const NavbarCRUD =() =>{
 
     const { getTotalCartItems} = useContext(ShopContext);
 
-    const totalitems = getTotalCartItems();
+    const totalitems = getTotalCartItems(user);
 
     const handleClick = () =>{
         setIsMenuExtend(!isMenuExtend);

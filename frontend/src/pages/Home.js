@@ -63,7 +63,8 @@ export default function Home () {
            </div>
 
            <div className="product-category" >
-            <Link to="/homedecor" className="subCategory">
+            {/* <Link to="/homedecor" className="subCategory"> */}
+            <Link to={{ pathname: '/tableware', search: `?type=Tableware` }}  className="subCategory">
                <div className='categoryIcon'>
                   <img src={HomeDecor} alt="" style={{width:'50px'}} />
                   <h4 style={{fontFamily: `var(--font-base)`, fontWeight:'normal', color:'#c40202'}}>HOME DÉCOR </h4>
@@ -71,7 +72,7 @@ export default function Home () {
                </div>
              </Link>
 
-            <Link to="/drinkset" className="subCategory">
+            <Link to={{ pathname: '/drinkset', search: `?type=drinkset` }}  className="subCategory">
                <div  className='categoryIcon'>
                   <img src={drinkSet} alt="" style={{width:'50px'}} />
                   <h4 style={{fontFamily: `var(--font-base)`, fontWeight:'normal', color:'#772f67'}}>DRINK SET </h4>
@@ -79,7 +80,7 @@ export default function Home () {
                </div>
              </Link>
 
-            <Link to="/tableware"  className="subCategory">
+            <Link to={{ pathname: '/tableware', search: `?type=Tableware` }}  className="subCategory">
                 <div  className='categoryIcon'>
                     <img src={tableWare} alt="" style={{width:'50px'}} />
                     <h4 style={{fontFamily: `var(--font-base)`, fontWeight:'normal', color:'#6baaca'}}>TABLEWARE </h4>

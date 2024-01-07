@@ -27,9 +27,9 @@ const Footer = () => {
                             <a href="/faq"> FAQ </a>
                             </li>
                             <li>Support</li>
-                            <li>
+                            {/* <li>
                             <a href="/orderconfirmation"> Order </a>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>

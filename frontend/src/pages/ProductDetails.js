@@ -1,4 +1,4 @@
-import React,{useRef} from "react";
+import React,{useRef, useEffect} from "react";
 import Reviews from "../components/Reviews";
 import data from "../data/reviewsData.json";
 import ProductData from "../data/productsData.json";
@@ -7,24 +7,21 @@ import Promo from "../components/Promo/Promo";
 import Navbar from "../components/Navbar";
 import RecommandCard from "../components/RecommandCard";
 import ImageSlider from "../components/ImageSlieder";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Footer from '../components/Footer/Footer'
 
 const ProductDetail = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
   const boxRef = useRef(null);
 
-  const pdt = ProductData.products.find((proudct) => proudct.id === id);
+  const location = useLocation();
+  const productData = location.state.data;
+  console.log("-->data:", productData);
 
-  if (!pdt) {
-
-    return <p>Product not found</p>;
-  }
-
-  const card = ProductData.products
-    .filter((productInfo) => productInfo.id !== pdt.id)
+  const card = location.state.products
+    .filter((productInfo) => productInfo._id !== productData._id)
     .map((productInfo) => (
       <RecommandCard
         key={productInfo.id}
@@ -36,6 +33,31 @@ const ProductDetail = () => {
         numberOfViews={productInfo.number_of_reviews}
       />
     ));
+
+    // useEffect(() => {
+    //   async function fetchData() {
+    //     try {
+    //       const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/byType?type=${type}`,
+    //         {
+    //           method: 'GET',
+    //           headers: {
+    //             'Content-Type': 'application/json',
+    //             // Authorization: `Bearer ${user.token}`,
+    //           },
+    //         });
+  
+    //       setData(await res.json());
+    //       setLoading(false);
+    //       // console.log("-->",productss);
+    //     } catch (error) {
+    //       console.error("->Error ProductCategory:", error);
+    //     }
+    //   }
+  
+    //   fetchData();
+    // }, []);
+
+
   const reviews = data.reviews.map((item) => (
     <Reviews
       key={item.id}
@@ -48,19 +70,20 @@ const ProductDetail = () => {
   ));
   const product = (
     <ProductInfo
-      key={pdt.id}
-      id={pdt.id}
-      name={pdt.name}
-      price={pdt.price}
-      rate={pdt.rate}
-      reviewNumber={pdt.number_of_reviews}
-      included={pdt.included}
-      detail={pdt.detail}
-      inventory={pdt.inventory}
+      data={productData}
+      key={productData.id}
+      id={productData.id}
+      name={productData.name}
+      price={productData.price}
+      rate={productData.rating}
+      reviewNumber={productData.numReviews}
+      included={productData.included}
+      detail={productData.detail}
+      inventory={productData.quantity}
     />
   );
 
-  const imgSlider = <ImageSlider imgURLs={pdt.imageURL} />;
+  const imgSlider = <ImageSlider imgURLs={productData.imageURL} />;
   
 
 

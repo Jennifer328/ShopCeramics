@@ -8,14 +8,52 @@ const getProducts = async (req, res) => {
 
 //get a single product
 const getProduct = async (req, res) => {
-    const productId = req.params.id;
+    // const productId = req.params.id;
+    const productId =  req.query.id;
+    console.log("getProduct by Id:", productId);
   try{
+
     const product = await Product.findOne({id: productId});
 
-    if(!product){
-      return res.status(404).json({message: 'Product not found'});
+      if(!product){
+        return res.status(404).json({message: 'Product not found'});
+      }
+  
+    
+    res.status(200).json(product);  
+
+  }catch(err){
+    res.status(500).json({message: err.message});
+  }
+}
+
+const getProductByMongoId = async (req, res) => {
+  // const productId = req.params.id;
+  const productId =  req.query.id;
+  console.log("getProduct by Id:", productId);
+try{
+  const product = await Product.findOne({_id: productId});
+
+  if(!product){
+    res.status(404).json({message: 'Product not found'});
+  }
+  res.status(200).json(product);
+
+}catch(err){
+  res.status(500).json({message: err.message});
+}
+}
+
+const getProductByType = async (req, res) => {
+    const productType = req.query.type;
+    console.log("-->getProductByType:", productType);
+  try{
+    const products = await Product.find({category: productType});
+
+    if(!products){
+      res.status(404).json({message: 'Product not found'});
     }
-    res.status(200).json(product);
+    res.status(200).json(products);
 
   }catch(err){
     res.status(500).json({message: err.message});
@@ -72,5 +110,7 @@ module.exports = {
     getProduct,
     createProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    getProductByType,
+    getProductByMongoId
 }

@@ -3,15 +3,13 @@ import {useNavigate, Link} from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import {useLogout} from '../hooks/useLogout';
 import {getHours} from 'date-fns';
-
-
 import Navbar from '../components/Navbar';
 import Promo from '../components/Promo/Promo';
 import Footer from '../components/Footer/Footer';
 import Userboard from '../components/AdminDashboard/Userboard/Userboard';
 import Productboard from '../components/AdminDashboard/Productboard/Prodcutboard';
 import Orderboard from '../components/AdminDashboard/Orderboard/Orderboard';
-
+import Reviewboard from '../components/AdminDashboard/Reviewboard/ReviewDashboard'
 export default function Admin() {
    
     const {user} = useAuthContext();
@@ -27,7 +25,7 @@ export default function Admin() {
     
     const fetchUsers = async () =>{
       try{
-        const response = await fetch('/account',{
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/account`,{
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -44,7 +42,7 @@ export default function Admin() {
 
     const fetchProducts = async () =>{
       try{
-        const response = await fetch('/products',{
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products`,{
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -60,7 +58,7 @@ export default function Admin() {
 
     const fetchOrders = async () =>{
       try{
-        const response = await fetch('/orders',{
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/orders`,{
           method: 'GET',
           headers:{
             'Conten-Type': "application/json",
@@ -131,6 +129,7 @@ export default function Admin() {
                     {activeView === 'users' && <Userboard data={users}/>}
                     {activeView === 'products' && <Productboard data={products}/>}
                     {activeView === 'orders' && <Orderboard data={orders}/>}
+                    {activeView === 'reviews' && <Reviewboard />}
 
                
 

@@ -16,9 +16,9 @@
     padding-top: 18px;
     }
   
-  @media (max-width: 768px){
+  @media (max-width: 1200px){
     .promo p{
-      font-size: 14px;
+      font-size: 16px;
     }
   
     @media (max-width: 480px){
